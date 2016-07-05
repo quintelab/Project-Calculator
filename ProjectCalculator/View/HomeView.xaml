@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ProjectCalculator.Controls;assembly=ProjectCalculator" x:Class="ProjectCalculator.View.HomeView">
+	<ContentPage.Content>
+		<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+			<StackLayout Padding="20" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+				<Label Text="Projects:">
+				</Label>
+				<controls:BindablePicker ItemsSource="{Binding Projects}" DisplayProperty="name" WidthRequest="150" SelectedItem="{Binding SelectedProject}">
+				</controls:BindablePicker>
+				<StackLayout Orientation="Horizontal">
+					<Label Text="Filter by specific date" HeightRequest="35" VerticalTextAlignment="Center">
+					</Label>
+					<Switch IsToggled="{Binding SearchPeriod}">
+					</Switch>
+				</StackLayout>
+				<StackLayout Orientation="Horizontal">
+					<Label Text="Initial Date:" WidthRequest="100" HeightRequest="35" VerticalTextAlignment="Center">
+					</Label>
+					<DatePicker HeightRequest="35" IsEnabled="{Binding IsInitialDateEnable, Mode=TwoWay}" Date="{Binding InitialDate}">
+					</DatePicker>
+				</StackLayout>
+				<StackLayout Orientation="Horizontal">
+					<Label Text="Final Date:" WidthRequest="100" HeightRequest="35" VerticalTextAlignment="Center">
+					</Label>
+					<DatePicker HeightRequest="35" IsEnabled="{Binding IsEndDateEnable, Mode=TwoWay}" Date="{Binding EndDate}">
+					</DatePicker>
+				</StackLayout>
+				<StackLayout Padding="5">
+					<Button Text="Search" BorderColor="Black" BorderWidth=".5" Command="{Binding SearchCommand}">
+					</Button>
+				</StackLayout>
+				<StackLayout Padding="0,50,0,0" IsVisible="{Binding IsPanelCustomVisible}">
+					<Label Text="{Binding SelectedProject.name}">
+					</Label>
+					<Label Text="{Binding TotalMinutes}">
+					</Label>
+					<Label Text="{Binding TotalHours}">
+					</Label>
+					<Label Text="{Binding TotalCost}">
+					</Label>
+				</StackLayout>
+			</StackLayout>
+			<ContentView x:Name="actIndBackground" BackgroundColor="#222222" Opacity="0.5" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="{Binding IsLoading}" />
+			<ActivityIndicator x:Name="actInd" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="#3498DB" />
+		</AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>
